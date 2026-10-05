@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:8787/api/products";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/products`;
 
 export default function ProductForm({
   productToEdit,

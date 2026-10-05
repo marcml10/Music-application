@@ -27,14 +27,14 @@ export default function HomePage({ onNavigate, onAddToCart, onViewProduct }) {
 
   useEffect(() => {
     // 1. Fetch our own database products
-    fetch("http://localhost:8787/api/products")
+    fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       .then(res => res.json())
       .then(dbData => {
         setProducts(dbData);
         setLoading(false);
 
         // 2. Live-fetch external JSON from Headphone Zone (via our proxy to bypass CORS)
-        fetch("http://localhost:8787/api/proxy/headphonezone")
+        fetch(`${import.meta.env.VITE_API_URL}/api/proxy/headphonezone`)
           .then(res => res.json())
           .then(hzData => {
             if (Array.isArray(hzData)) {

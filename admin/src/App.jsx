@@ -7,7 +7,7 @@ import ProductDialog from "./components/ProductDialog";
 import ProductToolbar from "./components/ProductToolbar";
 import DeleteDialog from "./components/DeleteDialog";
 
-const API_URL = "http://localhost:8787/api/products";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/products`;
 
 export default function App() {
   const [page, setPage] = useState("dashboard");
