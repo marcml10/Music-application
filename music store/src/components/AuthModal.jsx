@@ -42,12 +42,26 @@ export default function AuthModal({ isOpen, onClose }) {
           }
         }
       });
-      if (error) setError(error.message);
-      else setMessage('Check your email for the confirmation link.');
+      if (error) {
+        if (error.message.toLowerCase().includes('already registered')) {
+          setError('Account already exists.');
+        } else {
+          setError(error.message);
+        }
+      } else {
+        setMessage('Check your email for the confirmation link.');
+      }
     } else {
       const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) setError(error.message);
-      else onClose();
+      if (error) {
+        if (error.message.toLowerCase().includes('invalid login credentials')) {
+          setError('Account does not exist or incorrect password.');
+        } else {
+          setError(error.message);
+        }
+      } else {
+        onClose();
+      }
     }
     
     setLoading(false);
